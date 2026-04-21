@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Binding Score Predictor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <div class="app-card">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Molecular Binding Prediction</p>
+          <h1>Binding Score Predictor</h1>
+          <p class="subtitle">
+            Run binding score prediction with the ensemble model using single
+            input or batch CSV upload.
+          </p>
+        </div>
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Production-ready inference UI
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button id="tab-ml" class="tab-btn active" onclick="showMode('single')">
+          ML Predictor
+        </button>
+      </div>
+
+      <section class="model-panel">
+        <div class="panel-header">
+          <div>
+            <h2>ML Predictor</h2>
+            <p>Predict binding score from ligand SMILES and 27 active-site residues.</p>
+          </div>
+        </div>
+
+        <div class="subtabs">
+          <button id="single-btn" class="subtab-btn active" onclick="showMode('single')">
+            Single Input
+          </button>
+          <button id="csv-btn" class="subtab-btn" onclick="showMode('csv')">
+            CSV Upload
+          </button>
+        </div>
+
+        <div id="single-panel" class="mode-panel">
+          <div class="form-grid">
+            <div class="field full-width">
+              <label for="smiles">Ligand SMILES</label>
+              <input
+                id="smiles"
+                type="text"
+                placeholder="e.g. CC(=O)Oc1ccccc1C(=O)O"
+              />
+            </div>
+
+            <div class="field full-width">
+              <label for="residues">Active-site residues (27)</label>
+              <input
+                id="residues"
+                type="text"
+                maxlength="27"
+                placeholder="Enter exactly 27 residue characters"
+              />
+              <small>Example format: ACDEFGHIKLMNPQRSTVWYAAAAAAA</small>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="primary-btn" onclick="predictSingle()">
+              Predict
+            </button>
+          </div>
+
+          <div id="single-result" class="result-slot"></div>
+        </div>
+
+        <div id="csv-panel" class="mode-panel hidden">
+          <div class="upload-card">
+            <label class="upload-label" for="csv-file">Upload CSV file</label>
+            <input id="csv-file" type="file" accept=".csv" />
+            <p class="upload-hint">
+              Required columns: <code>smiles</code>, <code>active_site_residues</code>
+            </p>
+            <button class="primary-btn" onclick="predictBatch()">
+              Predict
+            </button>
+          </div>
+
+          <div id="batch-result" class="result-slot"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
