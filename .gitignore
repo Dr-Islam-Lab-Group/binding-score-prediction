@@ -1,0 +1,11 @@
+# Python
+.venv/
+**/.venv/
+__pycache__/
+*.pyc
+
+# Mac
+.DS_Store
+
+# Models
+backend/models/catboost.pkl
